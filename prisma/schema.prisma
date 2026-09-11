@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Problem {
+  id           String     @id @default(cuid())
+  title        String
+  description  String
+  requirements String[]
+  difficulty   Difficulty @default(MEDIUM)
+  createdAt    DateTime   @default(now())
+  attempts     Attempt[]
+}
+
+model Attempt {
+  id           String        @id @default(cuid())
+  problemId    String
+  sessionId    String
+  solutionText String
+  status       AttemptStatus @default(PENDING)
+  submittedAt  DateTime      @default(now())
+  problem      Problem       @relation(fields: [problemId], references: [id])
+  feedback     Feedback?
+}
+
+model Feedback {
+  id                    String   @id @default(cuid())
+  attemptId             String   @unique
+  abstractionScore      Int
+  responsibilitiesScore Int
+  relationshipsScore    Int
+  tradeoffsScore        Int
+  strengths             String[]
+  improvements          String[]
+  overallVerdict        String
+  createdAt             DateTime @default(now())
+  attempt               Attempt  @relation(fields: [attemptId], references: [id])
+}
+
+enum AttemptStatus {
+  PENDING
+  EVALUATED
+  FAILED
+}
+
+enum Difficulty {
+  EASY
+  MEDIUM
+  HARD
+}
