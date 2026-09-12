@@ -6,8 +6,8 @@ const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] })
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] })
 
 export const metadata: Metadata = {
-  title: "LLD Practice Platform",
-  description: "Practice Low-Level Design with AI-powered feedback",
+  title: "LLD Arena",
+  description: "Practice Low-Level Design with instant AI-powered feedback",
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

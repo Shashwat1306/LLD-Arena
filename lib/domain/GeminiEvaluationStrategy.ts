@@ -55,6 +55,7 @@ export class GeminiEvaluationStrategy implements EvaluationStrategy {
     this.model = genAI.getGenerativeModel({
       model: "gemini-3.6-flash",
       systemInstruction: SYSTEM_PROMPT,
+      generationConfig: { temperature: 0 }
     })
   }
 
